@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "171234321976",
+    "project_id": "freedom-of-athletics-d4d04",
+    "storage_bucket": "freedom-of-athletics-d4d04.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:171234321976:android:369bf8eeec37506630a8cd",
+        "android_client_info": {
+          "package_name": "com.example.freedom_of_athletics"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "171234321976-4tin7stu37ktbn2o2a76fqmllk2rpom0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjc7O2J3yyWkB2ESE-U4ShKKIimLZc6-o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "171234321976-4tin7stu37ktbn2o2a76fqmllk2rpom0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

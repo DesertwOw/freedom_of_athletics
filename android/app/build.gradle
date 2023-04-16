@@ -1,0 +1,109 @@
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterRoot = localProperties.getProperty('flutter.sdk')
+if (flutterRoot == null) {
+    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
+}
+
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
+if (flutterVersionCode == null) {
+    flutterVersionCode = '1'
+}
+
+def flutterVersionName = localProperties.getProperty('flutter.versionName')
+if (flutterVersionName == null) {
+    flutterVersionName = '1.0'
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+apply plugin: 'com.google.gms.google-services'
+
+android {
+    compileSdkVersion 33
+    ndkVersion flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+
+
+    def versionPropsFile = file('version.properties')
+    def value = 0
+
+    Properties versionProps = new Properties()
+
+    if (!versionPropsFile.exists()) {
+        versionProps['VERSION_MAJOR'] = "1"
+        versionProps['VERSION_MINOR'] = "0"
+        versionProps['VERSION_PATCH'] = "0"
+        versionProps['VERSION_BUILD'] = "0"
+        versionProps.store(versionPropsFile.newWriter(), null)
+    }
+
+    def runTasks = gradle.startParameter.taskNames
+    if ('assembleRelease' in runTasks) {
+        value = 1
+    }
+
+    if (versionPropsFile.canRead()) {
+
+        versionProps.load(new FileInputStream(versionPropsFile))
+
+        versionProps['VERSION_PATCH'] = (versionProps['VERSION_PATCH'].toInteger() + value).toString()
+        versionProps['VERSION_BUILD'] = (versionProps['VERSION_BUILD'].toInteger() + 1).toString()
+
+        versionProps.store(versionPropsFile.newWriter(), null)
+
+        // change major and minor version here
+        def mVersionName = "${versionProps['VERSION_MAJOR']}.${versionProps['VERSION_MINOR']}.${versionProps['VERSION_PATCH']}"
+
+        defaultConfig {
+            applicationId "com.example.freedom_of_athletics" // leave it at the value you have in your file
+            minSdkVersion 23 // this as well
+            targetSdkVersion 33 // and this
+            versionCode versionProps['VERSION_BUILD'].toInteger()
+            versionName "${mVersionName} Build: ${versionProps['VERSION_BUILD']}"
+            testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        }
+    }
+    else {
+        throw new GradleException("Could not read version.properties!")
+    }
+
+    buildTypes {
+        release {
+            // TODO: Add your own signing config for the release build.
+            // Signing with the debug keys for now, so `flutter run --release` works.
+            signingConfig signingConfigs.debug
+        }
+    }
+}
+
+flutter {
+    source '../..'
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation platform('com.google.firebase:firebase-bom:30.3.1')
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.facebook.android:facebook-android-sdk:[8,9)'
+}
