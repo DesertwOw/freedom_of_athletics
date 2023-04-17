@@ -62,8 +62,7 @@ class _ManageFriendsState extends State<ManageFriends> {
                                     title: Text(
                                       user.get('firstname'),
                                       style: const TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
                                         fontSize: 20,
                                       ),
                                     ),

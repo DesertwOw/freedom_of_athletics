@@ -25,13 +25,17 @@ class _createAdminAccountState extends State<createAdminAccount> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:
-         Column(
+      body: SingleChildScrollView(
+        child: Column(
           children: [
             Padding(
               padding: EdgeInsets.all(10),
-                child: customAppBar()),
-            Text('Create an Admin account',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+              child: customAppBar(),
+            ),
+            Text(
+              'Create an Admin account',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -40,7 +44,8 @@ class _createAdminAccountState extends State<createAdminAccount> {
                     Get.back();
                   },
                   child: Container(
-                    margin: const EdgeInsets.only(top: 50, bottom: 20),
+                    margin:
+                    const EdgeInsets.only(top: 50, bottom: 20),
                     width: 30,
                     height: 30,
                   ),
@@ -51,24 +56,40 @@ class _createAdminAccountState extends State<createAdminAccount> {
               margin: EdgeInsets.fromLTRB(30, 0, 30, 0),
               child: Column(
                 children: [
-                  EmailField(emailController: emailTextController),
-                  const SizedBox(
-                    height:20,
+                  EmailField(
+                    emailController: emailTextController,
                   ),
-                  NameInputField(nameController: firstnameTextController, labelTexts: "Firstname", name: "Firstname"),
                   const SizedBox(
-                    height:20,
+                    height: 20,
                   ),
-                  NameInputField(nameController: lastnameTextController, labelTexts: "Lastname", name: "Lastname"),
+                  NameInputField(
+                    nameController: firstnameTextController,
+                    labelTexts: "Firstname",
+                    name: "Firstname",
+                  ),
                   const SizedBox(
-                    height:20,
+                    height: 20,
                   ),
-                  ProfilePasswordField(passwordController: passwordTextController),
+                  NameInputField(
+                    nameController: lastnameTextController,
+                    labelTexts: "Lastname",
+                    name: "Lastname",
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  ProfilePasswordField(
+                    passwordController: passwordTextController,
+                  ),
                   TextButton(
                     child: const Text("Create"),
                     onPressed: () async {
                       try {
-                      UserHelper.createAdmin(emailTextController.text, firstnameTextController.text, lastnameTextController.text,passwordTextController.text);
+                        UserHelper.createAdmin(
+                            emailTextController.text,
+                            firstnameTextController.text,
+                            lastnameTextController.text,
+                            passwordTextController.text);
                       } catch (e) {
                         print(e);
                       }
@@ -77,9 +98,9 @@ class _createAdminAccountState extends State<createAdminAccount> {
                 ],
               ),
             ),
-
           ],
         ),
+      ),
     );
   }
 }

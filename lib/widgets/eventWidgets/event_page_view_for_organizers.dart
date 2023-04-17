@@ -244,32 +244,31 @@ class _EventPageViewForOrganizersState
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 10),
-                                      child: Column(
-                                        children: [
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          CircleAvatar(
-                                            backgroundImage: NetworkImage(
-                                                participant
-                                                    .get('profilePicture')),
-                                          ),
-                                          Text(
-                                            participant.get('firstname'),
-                                            style: TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.normal,
+                                      child: Expanded(
+                                        child: Column(
+                                          children: [
+                                            CircleAvatar(
+                                              backgroundImage: NetworkImage(
+                                                  participant
+                                                      .get('profilePicture')),
                                             ),
-                                          ),
-                                          GestureDetector(
-                                            child: Icon(Iconsax.profile_delete),
-                                            onTap: () {
-                                              UserHelper.RemoveParticipant(
-                                                  widget.eventData.id,
-                                                  participant.get('Uid'));
-                                            },
-                                          )
-                                        ],
+                                            Text(
+                                              participant.get('firstname'),
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                            ),
+                                            GestureDetector(
+                                              child: Icon(Iconsax.profile_delete),
+                                              onTap: () {
+                                                UserHelper.RemoveParticipant(
+                                                    widget.eventData.id,
+                                                    participant.get('Uid'));
+                                              },
+                                            )
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),

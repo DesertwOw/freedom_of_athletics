@@ -70,8 +70,7 @@ class _RecruitmentState extends State<Recruitment> {
                               title: Text(
                                 user.get('firstname'),
                                 style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
                                   fontSize: 20,
                                 ),
                               ),

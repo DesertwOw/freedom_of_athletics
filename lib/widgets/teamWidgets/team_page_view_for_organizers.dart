@@ -115,7 +115,7 @@ class _TeamPageViewForOrganizersState extends State<TeamPageViewForOrganizers> {
               children: [
                SizedBox(
               height: 117,
-              width: 400,
+              width: MediaQuery.of(context).size.width,
               child: FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
                 future: widget.teamData.reference.collection("members").get(),
                 builder: (context, snapshot) {
